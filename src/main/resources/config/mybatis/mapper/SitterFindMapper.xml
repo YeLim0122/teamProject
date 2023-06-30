@@ -1,0 +1,33 @@
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.find.mapper.SitterFindMapper">
+
+	<!-- 총 게시글 수 가져오기 -->
+	<select id="getTotalCount" resultType="_int" parameterType="paging">
+		select count(*) from introduce 
+		<if test="findAddr != ''">
+			where addr like '%' || #{findAddr} || '%'
+		</if>
+	</select>
+	
+	<select id="selectByAddr" resultType="sitter" parameterType="string">
+		select * from introduce where addr like '%' || #{value} || '%'
+	</select>
+	
+	
+	<select id="selectPaging" resultType="sitter" parameterType="paging">
+		select * from (
+			select row_number() over(order by ino desc) rn, introduce.*
+			from introduce
+			<if test="findAddr != ''">
+				where addr like '%' || #{findAddr} || '%'
+			</if>
+			)
+		<![CDATA[
+			where rn > #{start} and rn <= #{end}
+		]]>
+	</select>
+		
+	
+</mapper>

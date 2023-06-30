@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
+
+	<!-- typeAlias 타입 별칭 설정 ================== -->
+	<typeAliases>
+		<typeAlias type="com.find.model.SitterVO" alias="sitter" />
+		<typeAlias type="com.find.model.WishVO" alias="wish" />
+		<typeAlias type="com.find.model.PagingVO" alias="paging" />
+		<typeAlias type="com.user.model.UserVO" alias="user" />
+	</typeAliases>
+	
+	
+	<!-- mapper 정의 ============================ -->
+	<mappers>
+		<mapper resource="config/mybatis/mapper/SitterFindMapper.xml" />
+		<mapper resource="config/mybatis/mapper/WishMapper.xml" />
+		<mapper resource="config/mybatis/mapper/UserMapper.xml" />
+	</mappers>
+	
+</configuration>
